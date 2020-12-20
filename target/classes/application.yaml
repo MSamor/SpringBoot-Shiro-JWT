@@ -1,0 +1,9 @@
+#spring:
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/hotel?characterEncoding=utf8&useSSL=true&serverTimezone=UTC
+#    username: root
+#    password: root
+#mybatis:
+#  configuration:
+#    #开启自动下划线格式转驼峰格式
+#    map-underscore-to-camel-case: true
