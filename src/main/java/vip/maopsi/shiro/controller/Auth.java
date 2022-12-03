@@ -13,27 +13,27 @@ import java.util.HashMap;
 @RestController
 public class Auth {
     @GetMapping("/api/auth/bbb")
-    public ResponseEntity test(){
+    public <T> ResponseEntity<T> test() {
         return RGenerator.resSuccess();
     }
 
     @RequiresRoles({"user"})
     @GetMapping("/api/auth/ccc")
-    public ResponseEntity test2(){
+    public <T> ResponseEntity<T> test2() {
         return RGenerator.resSuccess();
     }
 
     @GetMapping("/unauth")
-    public ResponseEntity unauth(){
+    public <T> ResponseEntity<T> unauth() {
         return RGenerator.resFail();
     }
 
     @GetMapping("/login")
-    public ResponseEntity login(){
+    public ResponseEntity<String> login() {
         //验证账号密码  默认通过
         //生成token
         HashMap<String, Object> map = new HashMap<>();
-        map.put("role","admin");
+        map.put("role", "admin");
         String token = JWTUtil.createToken(map);
         //返回token
         return RGenerator.resSuccessData(token);
@@ -41,7 +41,7 @@ public class Auth {
 
     @RequiresRoles({"admin"})
     @GetMapping("/api/auth/aaa")
-    public ResponseEntity testadmin(){
+    public <T> ResponseEntity<T> testadmin() {
         return RGenerator.resSuccess();
     }
 }

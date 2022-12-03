@@ -27,6 +27,7 @@ public class JWTRealm extends AuthorizingRealm {
         Map<String, Object> principal = (Map<String, Object>) principalCollection.getPrimaryPrincipal();
         //拿到授权信息，对象中包含用户和角色权限信息
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+        //info中的角色可以在controller中使用@RequiresRoles({"user"})这样的注解判断权限
         info.addRole((String) principal.get("role"));
         return info;
     }
@@ -41,6 +42,6 @@ public class JWTRealm extends AuthorizingRealm {
         JWTUtil.verifyToken(token);
         //解析token 放到 返回里面
         map = JWTUtil.parseToken(token);
-        return new SimpleAuthenticationInfo(map,true,this.getName());
+        return new SimpleAuthenticationInfo(map, true, this.getName());
     }
 }

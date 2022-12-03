@@ -1,8 +1,8 @@
 package vip.maopsi.shiro.common.R;
 
 public class RGenerator {
-    public static ResponseEntity resSuccess(){
-        return new ResponseEntity().setCode(DefinedCode.SUCCESS.getCode())
+    public static <T> ResponseEntity<T> resSuccess(){
+        return new ResponseEntity<T>().setCode(DefinedCode.SUCCESS.getCode())
                                     .setMsg(DefinedCode.SUCCESS.getMsg());
     }
 
@@ -15,18 +15,18 @@ public class RGenerator {
      * @return ResponseEntity<T>
      */
     public static <T> ResponseEntity<T> resSuccessData(T data){
-        return new ResponseEntity().setCode(DefinedCode.SUCCESS.getCode())
+        return new ResponseEntity<T>().setCode(DefinedCode.SUCCESS.getCode())
                 .setMsg(DefinedCode.SUCCESS.getMsg())
                 .setData(data);
     }
 
-    public static ResponseEntity resFail(){
-        return new ResponseEntity().setCode(DefinedCode.ERROR.getCode())
+    public static <T> ResponseEntity<T> resFail(){
+        return new ResponseEntity<T>().setCode(DefinedCode.ERROR.getCode())
                 .setMsg(DefinedCode.ERROR.getMsg());
     }
 
-    public static ResponseEntity resFailData(String msg){
-        return new ResponseEntity().setCode(DefinedCode.ERROR.getCode())
+    public static <T> ResponseEntity<T> resFailData(String msg){
+        return new ResponseEntity<T>().setCode(DefinedCode.ERROR.getCode())
                 .setMsg(msg);
     }
 }

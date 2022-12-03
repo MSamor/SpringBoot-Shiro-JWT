@@ -11,7 +11,7 @@ public class ResponseEntity<T> {
         return code;
     }
 
-    public ResponseEntity setCode(int code) {
+    public ResponseEntity<T> setCode(int code) {
         this.code = code;
         return this;
     }
@@ -20,7 +20,7 @@ public class ResponseEntity<T> {
         return msg;
     }
 
-    public ResponseEntity setMsg(String msg) {
+    public ResponseEntity<T> setMsg(String msg) {
         this.msg = msg;
         return this;
     }
@@ -29,7 +29,7 @@ public class ResponseEntity<T> {
         return data;
     }
 
-    public ResponseEntity setData(T data) {
+    public ResponseEntity<T> setData(T data) {
         this.data = data;
         return this;
     }

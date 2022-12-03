@@ -16,6 +16,7 @@ import java.io.IOException;
 public class JWTFilter extends AccessControlFilter {
     /**
      * 请求到来后的响应方法
+     *
      * @param servletRequest
      * @param servletResponse
      * @param o
@@ -32,6 +33,7 @@ public class JWTFilter extends AccessControlFilter {
     /**
      * 认证未通过执行这个方法、上面返回false 下面的方法才会执行。由于上面
      * 方法永远是false，所以下面的方法一定会执行。验证token即可
+     *
      * @param servletRequest
      * @param servletResponse
      * @return
@@ -40,7 +42,7 @@ public class JWTFilter extends AccessControlFilter {
     @Override
     protected boolean onAccessDenied(ServletRequest servletRequest, ServletResponse servletResponse) throws Exception {
         System.out.println("token filter 认证");
-        HttpServletResponse response=  (HttpServletResponse)servletResponse;
+        HttpServletResponse response = (HttpServletResponse) servletResponse;
         //获取token
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         String token = request.getHeader("token");
@@ -49,9 +51,11 @@ public class JWTFilter extends AccessControlFilter {
         Subject subject = SecurityUtils.getSubject();
         //发起认证
         try {
+            // login方法会进入到JWTRealm中进行认证和授权，jwtToken就是JWTRealm中的AuthenticationToken参数
             subject.login(jwtToken);
-        }catch (Exception e){
-            ResponseEntity result = new ResponseEntity().setCode(DefinedCode.ERROR.getCode()).setMsg(e.getMessage());
+        } catch (Exception e) {
+            // 认证和授权失败后的返回内容
+            ResponseEntity<String> result = new ResponseEntity<String>().setCode(DefinedCode.ERROR.getCode()).setMsg(e.getMessage());
             responseResult(response, result);
             //这个false很关键，不然会继续向下执行。
             return false;
@@ -67,7 +71,7 @@ public class JWTFilter extends AccessControlFilter {
         try {
             response.getWriter().write(JSON.toJSONString(result));
         } catch (IOException ex) {
-            ex.getMessage();
+            System.out.println(ex.getMessage());
         }
     }
 }

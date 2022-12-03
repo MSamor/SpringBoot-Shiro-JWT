@@ -25,6 +25,7 @@ public class SwaggerConfig {
 
     /**
      * swagger2的配置文件
+     *
      * @return Docket
      */
     @Bean
@@ -33,11 +34,11 @@ public class SwaggerConfig {
                 .groupName("酒店管理系统API")
                 .pathMapping("/")
                 .select()
-                    .apis(RequestHandlerSelectors.basePackage("maosi"))
-                    //不监控 测试api
-                    .paths(Predicates.not(PathSelectors.regex("/Ex.*")))
-                    //过滤的接口
-                    .paths(PathSelectors.regex("/.*"))
+                .apis(RequestHandlerSelectors.basePackage("maosi"))
+                //不监控 测试api
+                .paths(Predicates.not(PathSelectors.regex("/Ex.*")))
+                //过滤的接口
+                .paths(PathSelectors.regex("/.*"))
                 .build()
                 .securitySchemes(securitySchemes())
                 .securityContexts(securityContexts())
@@ -46,6 +47,7 @@ public class SwaggerConfig {
 
     /**
      * 设置学生api信息
+     *
      * @return Api构建
      */
     private ApiInfo hotelApiInfo() {
@@ -62,8 +64,7 @@ public class SwaggerConfig {
                 .build();
     }
 
-    private List<ApiKey> securitySchemes()
-    {
+    private List<ApiKey> securitySchemes() {
         List<ApiKey> apiKeyList = new ArrayList<ApiKey>();
         apiKeyList.add(new ApiKey("Authorization", "auth", "header"));
         return apiKeyList;
@@ -72,8 +73,7 @@ public class SwaggerConfig {
     /**
      * 安全上下文
      */
-    private List<SecurityContext> securityContexts()
-    {
+    private List<SecurityContext> securityContexts() {
         List<SecurityContext> securityContexts = new ArrayList<>();
         securityContexts.add(
                 SecurityContext.builder()
@@ -86,8 +86,7 @@ public class SwaggerConfig {
     /**
      * 默认的安全上引用
      */
-    private List<SecurityReference> defaultAuth()
-    {
+    private List<SecurityReference> defaultAuth() {
         AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
         AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
         authorizationScopes[0] = authorizationScope;
