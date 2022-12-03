@@ -18,19 +18,6 @@ import java.util.LinkedHashMap;
 @Configuration
 public class ShiroConfig {
 
-    @Autowired
-    private JWTRealm jWTRealm;
-
-    /**
-     * 装配自定义Reaml
-     *
-     * @return
-     */
-    @Bean
-    public JWTRealm shiroRealm() {
-        return new JWTRealm();
-    }
-
     /**
      * 配置安全管理器Realm
      *
@@ -40,7 +27,7 @@ public class ShiroConfig {
     public SecurityManager securityManager() {
         DefaultWebSecurityManager SecurityManager = new DefaultWebSecurityManager();
         //注入realm操作
-        SecurityManager.setRealm(jWTRealm);
+        SecurityManager.setRealm(new JWTRealm());
         return SecurityManager;
     }
 
